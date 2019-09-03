@@ -25,7 +25,8 @@ projects:
   exclude:
     archived: false
     forks: true
-    projects:
+    projects: 
+    - hello-world
     # - repo-name
 
 # social_media:
