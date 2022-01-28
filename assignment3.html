@@ -14,7 +14,7 @@
         <div class="header">
             <h1>Isla's Assignment 3!</h1>
             <p>
-            <img src="A3InputOutputSchem.jpg" width=400></a><br>
+            <img src="A3InputOutputSchem.png" width=400></a><br>
             I used a 10k resistor for the voltage divider because<br>
             it matched the range of the photoresistor.
             </p>
@@ -24,97 +24,10 @@
             analog in pin. Red is power and black is ground.
             </p>
             <p>
-            <pre>
-<font color="#95a5a6">&#47;*</font>
-<font color="#95a5a6"> &nbsp;A3 Input Output</font>
-<font color="#95a5a6"> &nbsp;This project lights up LEDs depending on how much light the</font>
-<font color="#95a5a6"> &nbsp;photoresistor is recieving. When the light is low, the</font>
-<font color="#95a5a6"> &nbsp;yellow light grows brighter before finally the red light</font>
-<font color="#95a5a6"> &nbsp;turns on, singifying darkness.</font>
-<font color="#95a5a6"> &nbsp;</font>
-<font color="#95a5a6"> &nbsp;HCDE 439 Isla Wisemore</font>
-<font color="#95a5a6">*&#47;</font>
-
-<font color="#434f54">&#47;&#47;declare variables for pins</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">analogInPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">redPin</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">yellowPin</font> <font color="#434f54">=</font> <font color="#000000">3</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">greenPin3</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">greenPin2</font> <font color="#434f54">=</font> <font color="#000000">5</font><font color="#000000">;</font>
-<font color="#00979c">const</font> <font color="#00979c">int</font> <font color="#000000">greenPin1</font> <font color="#434f54">=</font> <font color="#000000">6</font><font color="#000000">;</font>
-
-<font color="#434f54">&#47;&#47; value read from the photoresistor</font>
-<font color="#00979c">int</font> <font color="#000000">lightValue</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-<font color="#434f54">&#47;&#47; value output to the yellow LED</font>
-<font color="#00979c">int</font> <font color="#000000">outputValue</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
-
-<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
- &nbsp;<font color="#434f54">&#47;&#47; initialize serial communications at 9600 bps:</font>
- &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">9600</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47;initialize output pins</font>
- &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
-
-<font color="#000000">}</font>
-
-<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
- &nbsp;<font color="#434f54">&#47;&#47; read the analog in value</font>
- &nbsp;<font color="#000000">lightValue</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">analogInPin</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47; constrain to clean up data on low and high ends</font>
- &nbsp;<font color="#000000">lightValue</font> <font color="#434f54">=</font> <font color="#d35400">constrain</font><font color="#000000">(</font><font color="#000000">lightValue</font><font color="#434f54">,</font> <font color="#000000">300</font><font color="#434f54">,</font> <font color="#000000">900</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47; if value is in lowest bracket</font>
- &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">lightValue</font> <font color="#434f54">&lt;</font> <font color="#000000">420</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; turn on red, turn off others</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; else if value is in next bracket</font>
- &nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">lightValue</font> <font color="#434f54">&lt;</font> <font color="#000000">540</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; turn on yellow, turn off others</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; map the bracket to high-&gt;low</font>
- &nbsp;&nbsp;&nbsp;<font color="#000000">outputValue</font> <font color="#434f54">=</font> <font color="#d35400">map</font><font color="#000000">(</font><font color="#000000">lightValue</font><font color="#434f54">,</font> <font color="#000000">420</font><font color="#434f54">,</font> <font color="#000000">539</font><font color="#434f54">,</font> <font color="#000000">255</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#000000">outputValue</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; else if value is in next bracket</font>
- &nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">lightValue</font> <font color="#434f54">&lt;</font> <font color="#000000">660</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; turn on 3rd green pin, turn off others</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; else if value is in next bracket</font>
- &nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">lightValue</font> <font color="#434f54">&lt;</font> <font color="#000000">780</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; turn on 2nd green pin, turn off others</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; else the value is in the final bracket</font>
- &nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#000000">{</font>
- &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; turn on 3rd green pin, turn off others</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">redPin</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">yellowPin</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin3</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">greenPin1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">}</font>
-
- &nbsp;<font color="#434f54">&#47;&#47; wait 2 milliseconds before the next loop for the analog-to-digital</font>
- &nbsp;<font color="#434f54">&#47;&#47; converter to settle after the last reading:</font>
- &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font>
-
-</pre>
+            <img src="A3Code1.png"></a>
+            </p>
+            <p>
+            <img src="A3Code2.png"></a>
             </p>
             <p>
             <img src="A3InputOutput.gif" width=400></a><br>
