@@ -26,52 +26,7 @@
             ground.
             </p>
             <p>
-            <pre>
-<font color="#95a5a6">&#47;*</font>
-<font color="#95a5a6"> &nbsp;A4 Libraries!</font>
-<font color="#95a5a6"> &nbsp;Code taken from </font><u><font color="#95a5a6">https:&#47;&#47;www.circuitbasics.com&#47;how-to-set-up-the-dht11-humidity-sensor-on-an-arduino&#47;</font></u><font color="#95a5a6"></font>
-<font color="#95a5a6"></font>
-<font color="#95a5a6"> &nbsp;comments by Isla Wisemore</font>
-<font color="#95a5a6">*&#47;</font>
-<font color="#434f54">&#47;&#47;include both dht and lcd libaries</font>
-<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><font color="#000000">dht</font><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
-<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">LiquidCrystal</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
-
-<font color="#434f54">&#47;&#47;initialize an lcd with the correct pins</font>
-<b><font color="#d35400">LiquidCrystal</font></b> <font color="#000000">lcd</font><font color="#000000">(</font><font color="#000000">12</font><font color="#434f54">,</font> <font color="#000000">11</font><font color="#434f54">,</font> <font color="#000000">5</font><font color="#434f54">,</font> <font color="#000000">4</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
-
-<font color="#434f54">&#47;&#47;initialize temp&#47;humidity sensor</font>
-<font color="#000000">dht</font> <b><font color="#d35400">DHT</font></b><font color="#000000">;</font>
-
-<font color="#434f54">&#47;&#47;define the pin connected to dht</font>
-<font color="#5e6d03">#define</font> <font color="#000000">DHT11_PIN</font> <font color="#000000">7</font>
-
-<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;<font color="#434f54">&#47;&#47;start the lcd with the correct rows&#47;columns</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">16</font><font color="#434f54">,</font> <font color="#000000">2</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font>
-
-<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">{</font>
- &nbsp;<font color="#434f54">&#47;&#47;check the dht reading</font>
- &nbsp;<font color="#00979c">int</font> <font color="#000000">chk</font> <font color="#434f54">=</font> <b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">read11</font><font color="#000000">(</font><font color="#000000">DHT11_PIN</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47;move to the first row</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">setCursor</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font><font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font> 
- &nbsp;<font color="#434f54">&#47;&#47;print the temperature</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;Temp: &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">temperature</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#000000">(</font><font color="#00979c">char</font><font color="#000000">)</font><font color="#000000">223</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;C&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47;move to the second row</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">setCursor</font><font color="#000000">(</font><font color="#000000">0</font><font color="#434f54">,</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47;print the humidity</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;Humidity: &#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">humidity</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#000000">lcd</font><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;%&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
- &nbsp;<font color="#434f54">&#47;&#47;wait</font>
- &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font>
-
-</pre>
+            <img src="A4Code.png"></a>
             </p>
             <p>
             <img src="A4Libraries.gif" width=400></a><br>
