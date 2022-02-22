@@ -1,1 +1,89 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
 
+        <title>Isla's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>Isla's Assignment 5!</h1>
+            <p>
+            <img src="A5Schem.jpg" width=500></a><br>
+            I used a 2k resistor to limit the current to<br>
+            the transistor
+            </p>
+            <p>
+            <img src="A5Circuit.jpg" width=400></a><br>
+            Red wires are power and black are ground. Blue is<br>
+            input to the arduino.
+            ground.
+            </p>
+            <pre>
+<font color="#95a5a6">&#47;*</font>
+<font color="#95a5a6"> &nbsp;5A Higher Voltages and Transistors</font>
+<font color="#95a5a6"></font>
+<font color="#95a5a6"> &nbsp;Isla Wisemore</font>
+<font color="#95a5a6"> *&#47;</font>
+<font color="#434f54">&#47;&#47;include the temp sensor library</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><font color="#000000">dht</font><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+
+<font color="#434f54">&#47;&#47;save the pin used for the transistor</font>
+<font color="#00979c">int</font> <font color="#000000">outPin</font> <font color="#434f54">=</font> <font color="#000000">9</font><font color="#000000">;</font>
+
+<font color="#434f54">&#47;&#47;initialize the tempo sensor</font>
+<font color="#000000">dht</font> <b><font color="#d35400">DHT</font></b><font color="#000000">;</font>
+<font color="#434f54">&#47;&#47;link it to pin 7</font>
+<font color="#5e6d03">#define</font> <font color="#000000">DHT11_PIN</font> <font color="#000000">7</font>
+
+<font color="#434f54">&#47;&#47;lastTemp tracks the previously recorded temperature</font>
+<font color="#00979c">int</font> <font color="#000000">lastTemp</font><font color="#000000">;</font>
+ 
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font>
+<font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;initialize the transitor pin as an output</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">outPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;check the initial temperature</font>
+ &nbsp;&nbsp;&nbsp;<font color="#00979c">int</font> <font color="#000000">chk</font> <font color="#434f54">=</font> <b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">read11</font><font color="#000000">(</font><font color="#000000">DHT11_PIN</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;save it to lastTemp</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">lastTemp</font> <font color="#434f54">=</font> <b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">temperature</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+ 
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font>
+<font color="#000000">{</font>
+ &nbsp;<font color="#434f54">&#47;&#47;check the temperature</font>
+ &nbsp;<font color="#00979c">int</font> <font color="#000000">chk</font> <font color="#434f54">=</font> <b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">read11</font><font color="#000000">(</font><font color="#000000">DHT11_PIN</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<font color="#434f54">&#47;&#47;if the temperature has changed</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">temperature</font> <font color="#434f54">!=</font> <font color="#000000">lastTemp</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;
+ &nbsp;<font color="#434f54">&#47;&#47;turn the transisor on</font>
+ &nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">outPin</font><font color="#434f54">,</font> <font color="#000000">200</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#434f54">&#47;&#47;wait 1 second</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#434f54">&#47;&#47;turn the transistor off</font>
+ &nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">outPin</font><font color="#434f54">,</font> <font color="#000000">0</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#434f54">&#47;&#47;save the new temperature</font>
+ &nbsp;<font color="#000000">lastTemp</font> <font color="#434f54">=</font> <b><font color="#d35400">DHT</font></b><font color="#434f54">.</font><font color="#d35400">temperature</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<font color="#434f54">&#47;&#47;wait 1 second between measurements</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">1000</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+</pre>
+            <p>
+            Unfortunately I couldn't get this assignment<br>
+            to work functionally :(
+            </p>
+            <p>
+            Here is (most of) the documentation for assignment 5!
+            </p>
+        </div>
+        
+    </body>
+</html>
